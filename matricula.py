@@ -1,4 +1,4 @@
-
+from abc import ABC
 class Matricula:
     def __init__(self):
         self.__mesM = None
