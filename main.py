@@ -171,6 +171,80 @@ class Aluno(Pessoa):
             
         print(f"Desconto: {self.__desconto}%")
 
+
+class Coordenador(Professor):
+    BONIFICACAO = 0.15
+
+    def __init__(self) -> None:
+        super().__init__()
+        self.__area = ""
+        self.__plusSalario = 0.0
+
+    def cadastrarCoordenadorProf(self) -> None:
+        super().Cadastrar()
+
+        while True:
+            self.__area = input("\nArea de coordenacao: ").strip()
+            if self.__area == "":
+                print("Campo obrigatorio não preenchido!")
+            else:
+                print("Area cadastrada!")
+                break
+
+        self.calcularPlusSalario()
+
+    def exibirCoordenadorProf(self) -> None:
+        super().Exibir()
+        print(f"Area de coordenacao: {self.__area}")
+        print(f"Bonificacao (15%): R$ {self.__plusSalario:.2f}")
+
+    def calcularPlusSalario(self) -> float:
+        self.__plusSalario = round(self.getSalarioBruto() * Coordenador.BONIFICACAO, 2)
+        return self.__plusSalario
+
+    def Cadastrar(self) -> None:
+        self.cadastrarCoordenadorProf()
+
+    def Exibir(self) -> None:
+        self.exibirCoordenadorProf()
+
+
+class CoordenadorAdm(Funcionario):
+    BONIFICACAO = 0.135
+
+    def __init__(self) -> None:
+        super().__init__()
+        self.__area = ""
+        self.__plusSalario = 0.0
+
+    def cadastrarCoordenadorAdm(self) -> None:
+        super().Cadastrar()
+
+        while True:
+            self.__area = input("\nArea de coordenacao: ").strip()
+            if self.__area == "":
+                print("Campo obrigatorio não preenchido!")
+            else:
+                print("Area cadastrada!")
+                break
+
+        self.calcularPlusSalario()
+
+    def exibirCoordenadorAdm(self) -> None:
+        super().Exibir()
+        print(f"Area de coordenacao: {self.__area}")
+        print(f"Bonificacao (13,5%): R$ {self.__plusSalario:.2f}")
+
+    def calcularPlusSalario(self) -> float:
+        self.__plusSalario = round(self.getSalarioBruto() * CoordenadorAdm.BONIFICACAO, 2)
+        return self.__plusSalario
+
+    def Cadastrar(self) -> None:
+        self.cadastrarCoordenadorAdm()
+
+    def Exibir(self) -> None:
+        self.exibirCoordenadorAdm()
+
         
 if __name__ == "__main__":
     # programa principal provisorio para testes
