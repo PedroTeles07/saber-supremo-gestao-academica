@@ -1,93 +1,76 @@
 from abc import ABC
 class Matricula:
     def __init__(self):
+        self.__id = None
         self.__mesM = None
         self.__anoM = None
-        self.__id = None
+        
+    @property
+    def id(self):
+        return self.__id
 
-    def Matricular(self, lista_matriculas):
+    @id.setter
+    def id(self, codigo):
+        if codigo <= 0:
+            raise ValueError("Código inválido!")
+        self.__id = codigo
+
+   
+    @property
+    def mesM(self):
+        return self.__mesM
+
+    @mesM.setter
+    def mesM(self, mes):
+        if mes < 1 or mes > 12:
+            raise ValueError("Mês inválido!")
+        self.__mesM = mes
+
+    
+    @property
+    def anoM(self):
+        return self.__anoM
+
+    @anoM.setter
+    def anoM(self, ano):
+        if ano < 1:
+            raise ValueError("Ano inválido!")
+        self.__anoM = ano
+
+    def Matricular(self):
+
         while True:
             try:
                 codigo = int(input("\nCódigo do aluno: "))
-
-                if codigo <= 0:
-                    print("Código inválido!")
-                    continue
-
-                repetido = False
-
-                for matricula in lista_matriculas:
-                    if matricula.__id == codigo:
-                        repetido = True
-                        break
-
-                if repetido:
-                    print("Este aluno já possui matrícula!")
-                    continue
-
-                self.__id = codigo
+                self.id = codigo
                 break
 
-            except ValueError:
+            except ValueError as erro:
+                print(erro)
                 print("Digite um código válido!")
 
         while True:
             try:
                 mes = int(input("\nMês da matrícula: "))
-                ano = int(input("Ano da matrícula: "))
-
-                if mes < 1 or mes > 12:
-                    print("Mês inválido!")
-                    continue
-
-                if ano < 1:
-                    print("Ano inválido!")
-                    continue
-
-                self.__mesM = mes
-                self.__anoM = ano
-
-                print("Matrícula realizada com sucesso!")
+                self.mesM = mes
                 break
 
-            except ValueError:
-                print("Digite valores numéricos válidos!")
+            except ValueError as erro:
+                print(erro)
+
+        while True:
+            try:
+                ano = int(input("\nAno da matrícula: "))
+                self.anoM = ano
+                break
+
+            except ValueError as erro:
+                print(erro)
+
+        print("Matrícula realizada com sucesso!")
 
     def ExibirMatricula(self):
         print("\n--- DADOS DA MATRÍCULA ---")
-        print(f"ID do aluno: {self.__id}")
-        print(f"Mês da matrícula: {self.__mesM}")
-        print(f"Ano da matrícula: {self.__anoM}")
-
-
-if __name__ == "__main__":
-
-    lista_matriculas = []
-
-    while True:
-        print("\n1 - Cadastrar matrículas")
-        print("2 - Exibir matrículas")
-        print("3 - Sair")
-
-        opcao = input("Opção: ")
-
-        if opcao == "1":
-            matricula = Matricula()
-            matricula.Matricular(lista_matriculas)
-
-            lista_matriculas.append(matricula)
-
-        elif opcao == "2":
-
-            if len(lista_matriculas) == 0:
-                print("\nNenhuma matrícula cadastrada!")
-            else:
-                for matricula in lista_matriculas:
-                    matricula.ExibirMatricula()
-
-        elif opcao == "3":
-            print("Encerrando programa...")
-            break
-
-        else:
-            print("Opção inválida!")
+        print(f"ID do aluno: {self.id}")
+        print(f"Mês da matrícula: {self.mesM}")
+        print(f"Ano da matrícula: {self.anoM}")
